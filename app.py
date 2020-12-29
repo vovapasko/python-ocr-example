@@ -1,9 +1,9 @@
 import os
 
 from flask import Flask, render_template, request
+from werkzeug.utils import redirect
 
 from ocr_core import ocr_core
-
 
 UPLOAD_FOLDER = '/static/uploads/'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
@@ -18,7 +18,7 @@ def allowed_file(filename):
 
 @app.route('/')
 def home_page():
-    return render_template('index.html')
+    return redirect('/upload')
 
 
 @app.route('/upload', methods=['GET', 'POST'])
@@ -46,6 +46,7 @@ def upload_page():
                                    img_src=UPLOAD_FOLDER + file.filename)
     elif request.method == 'GET':
         return render_template('upload.html')
+
 
 if __name__ == '__main__':
     app.run()
