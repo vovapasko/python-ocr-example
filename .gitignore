@@ -1,1 +1,4 @@
 .sonarlint/**
+static/*
+.idea/*
+__pycache__/*
